@@ -1,6 +1,8 @@
 import matplotlib.pyplot as plt
 from build import *
 
+model = load_model()
+
 fig=plt.figure()
 
 for num,data in enumerate(test_data[:12]):
