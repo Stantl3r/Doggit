@@ -101,29 +101,3 @@ test_y = [i[1] for i in test]
 
 model.fit({'input': X}, {'targets': Y}, n_epoch=5, validation_set=({'input': test_x}, {'targets': test_y}), snapshot_step=500, show_metric=True, run_id=model_name)
 model.save(model_name)
-
-
-import matplotlib.pyplot as plt
-
-fig=plt.figure()
-
-for num,data in enumerate(test_data[:12]):
-
-	image_num = data[1]
-	image_data = data[0]
-
-	y = fig.add_subplot(3,4,num+1)
-	orig = image_data
-	data = image_data.reshape(size,size,1)
-	model_out = model.predict([data])[0]
-
-	if np.argmax(model_out) == 0: 
-		str_label='German'
-	elif np.argmax(model_out) == 1:
-		str_label='Golden'
-
-	y.imshow(orig,cmap='gray')
-	plt.title(str_label)
-	y.axes.get_xaxis().set_visible(False)
-	y.axes.get_yaxis().set_visible(False)
-plt.show()
