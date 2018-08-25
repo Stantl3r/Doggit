@@ -5,12 +5,12 @@ model = load_model()
 
 fig=plt.figure()
 
-for num,data in enumerate(test_data[:12]):
+for num,data in enumerate(test_data[:18]):
 
 	image_num = data[1]
 	image_data = data[0]
 
-	y = fig.add_subplot(3,4,num+1)
+	y = fig.add_subplot(4,5,num+1)
 	orig = image_data
 	data = image_data.reshape(size,size,1)
 	model_out = model.predict([data])[0]
@@ -19,6 +19,14 @@ for num,data in enumerate(test_data[:12]):
 		str_label='German'
 	elif np.argmax(model_out) == 1:
 		str_label='Golden'
+	elif np.argmax(model_out) == 2:
+		str_label = 'Bulldog'
+	elif np.argmax(model_out) == 3:
+		str_label = 'Beagle'
+	elif np.argmax(model_out) == 4:
+		str_label = 'Corgi'
+	"""elif np.argmax(model_out) == 5:
+		str_label = 'Yorkshire'"""
 
 	y.imshow(orig,cmap='gray')
 	plt.title(str_label)

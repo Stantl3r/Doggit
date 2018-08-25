@@ -8,6 +8,7 @@ from tflearn.layers.core import input_data, dropout, fully_connected
 from tflearn.layers.estimator import regression
 import tensorflow as tf
 
+tf.logging.set_verbosity(tf.logging.ERROR)
 training_images = 'C:/Users/Stanley/Desktop/Programs/RedditBot/images'
 testing_images = 'C:/Users/Stanley/Desktop/Programs/RedditBot/images_test'
 size = 100
@@ -17,9 +18,17 @@ model_name = 'dogs.model'
 def get_dog(image):
 	name = image.split('!')[0]
 	if name == 'german': 
-		return [1,0]
+		return [1,0,0,0,0]
 	elif name == 'golden': 
-		return [0,1]
+		return [0,1,0,0,0]
+	elif name == 'bulldog':
+		return [0,0,1,0,0]
+	elif name == 'beagle':
+		return [0,0,0,1,0]
+	elif name == 'corgi':
+		return [0,0,0,0,1]
+	"""elif name == 'yorkshire':
+		return [0,0,0,0,0,1]"""
 
 def train_data():
 	training_data = []
@@ -69,7 +78,7 @@ def load_model():
 	convnet = fully_connected(convnet, 1024, activation='relu')
 	convnet = dropout(convnet, 0.8)
 
-	convnet = fully_connected(convnet, 2, activation='softmax')
+	convnet = fully_connected(convnet, 5, activation='softmax')
 	convnet = regression(convnet, optimizer='adam', learning_rate=1e-3, loss='categorical_crossentropy', name='targets')
 
 	model = tflearn.DNN(convnet, tensorboard_dir='log')
