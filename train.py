@@ -11,5 +11,5 @@ Y = [i[1] for i in train]
 test_x = np.array([i[0] for i in test]).reshape(-1,size,size,1)
 test_y = [i[1] for i in test]
 
-model.fit({'input': X}, {'targets': Y}, n_epoch=25, validation_set=({'input': test_x}, {'targets': test_y}), snapshot_step=500, show_metric=True, run_id=model_name)
+model.fit({'input': X}, {'targets': Y}, n_epoch=20, validation_set=({'input': test_x}, {'targets': test_y}), snapshot_step=500, show_metric=True, run_id=model_name)
 model.save(model_name)

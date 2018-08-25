@@ -9,9 +9,9 @@ from tflearn.layers.estimator import regression
 import tensorflow as tf
 
 tf.logging.set_verbosity(tf.logging.ERROR)
-training_images = 'C:/Users/Stanley/Desktop/Programs/RedditBot/images'
-testing_images = 'C:/Users/Stanley/Desktop/Programs/RedditBot/images_test'
-size = 100
+training_images = '/Users/Stanley/Documents/Programs/RedditBot/images'
+testing_images = '/Users/Stanley/Documents/Programs/RedditBot/images_test'
+size = 110
 
 model_name = 'dogs.model'
 
@@ -48,9 +48,12 @@ def test_data():
 	testing_data = []
 	for image in os.listdir(testing_images):
 		path = os.path.join(testing_images,image)
-		image_num = image.split('.')[0]
-		image = cv2.resize(cv2.imread(path,cv2.IMREAD_GRAYSCALE), (size, size))
-		testing_data.append([np.array(image), image_num])   
+		try:
+			image_num = image.split('.')[0]
+			image = cv2.resize(cv2.imread(path,cv2.IMREAD_GRAYSCALE), (size, size))
+			testing_data.append([np.array(image), image_num])   
+		except:
+			continue
 	shuffle(testing_data)
 	np.save('test_data.npy', testing_data)
 	return testing_data
@@ -79,7 +82,7 @@ def load_model():
 	convnet = dropout(convnet, 0.8)
 
 	convnet = fully_connected(convnet, 5, activation='softmax')
-	convnet = regression(convnet, optimizer='adam', learning_rate=1e-3, loss='categorical_crossentropy', name='targets')
+	convnet = regression(convnet, optimizer='RMSprop', learning_rate=1e-3, loss='categorical_crossentropy', name='targets')
 
 	model = tflearn.DNN(convnet, tensorboard_dir='log')
 	if os.path.exists('{}.meta'.format(model_name)):
