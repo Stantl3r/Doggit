@@ -49,7 +49,7 @@ def authenticate():
 	reddit = praw.Reddit(client_id='ID',
                      	client_secret='SECRET',
                      	password='PASSWORD',
-                     	user_agent='testscript by /u/DoggitBot',
+                     	user_agent='Bot created by /u/Lvl1Stantler',
                      	username='DoggitBot')
 	return reddit
 
