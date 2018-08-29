@@ -56,7 +56,7 @@ def authenticate():
 
 #Start Bot
 reddit = authenticate()
-subreddit = reddit.subreddit('test').new()
+subreddit = reddit.subreddit('rarepuppers').new()
 for submission in subreddit:
 	submission.comments.replace_more(limit=None)
 	comment_queue = submission.comments[:]
