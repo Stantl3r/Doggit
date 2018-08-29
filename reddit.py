@@ -46,9 +46,9 @@ def determine_breed(url):
 		return dog_breed
 
 def authenticate():
-	reddit = praw.Reddit(client_id='***REMOVED***',
-                     	client_secret='***REMOVED***',
-                     	password='***REMOVED***',
+	reddit = praw.Reddit(client_id='ID',
+                     	client_secret='SECRET',
+                     	password='PASSWORD',
                      	user_agent='testscript by /u/DoggitBot',
                      	username='DoggitBot')
 	return reddit
