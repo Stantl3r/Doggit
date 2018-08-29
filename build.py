@@ -9,9 +9,9 @@ from tflearn.layers.estimator import regression
 import tensorflow as tf
 
 tf.logging.set_verbosity(tf.logging.ERROR)
-training_images = '/Users/Stanley/Documents/Programs/RedditBot/images'
-testing_images = '/Users/Stanley/Documents/Programs/RedditBot/images_test'
-submission_image = '/Users/Stanley/Documents/Programs/RedditBot/submission'
+training_images = '/Users/Stanley/Documents/Programs/Doggit/images'
+testing_images = '/Users/Stanley/Documents/Programs/Doggit/images_test'
+submission_image = '/Users/Stanley/Documents/Programs/Doggit/submission'
 size = 100
 
 model_name = 'dogs.model'
