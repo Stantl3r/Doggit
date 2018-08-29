@@ -72,9 +72,13 @@ def create_test_data():
 def create_submission_data(url):
 	submission_data = []
 	for image in os.listdir(submission_image):
-		path = os.path.join(submission_image,image)
-		image = cv2.resize(cv2.imread(path,cv2.IMREAD_GRAYSCALE), (size, size))
-		submission_data.append([np.array(image), url])   
+		try:
+			print(image)
+			path = os.path.join(submission_image,image)
+			image = cv2.resize(cv2.imread(path,cv2.IMREAD_GRAYSCALE), (size, size))
+			submission_data.append([np.array(image), url])   
+		except:
+			continue
 	np.save('submission_data.npy', submission_data)
 	return submission_data
 
