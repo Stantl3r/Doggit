@@ -50,10 +50,13 @@ def get_dog(image):
 def create_train_data():
 	training_data = []
 	for image in os.listdir(training_images):
-		breed = get_dog(image)
-		path = os.path.join(training_images, image)
-		image = cv2.resize(cv2.imread(path, cv2.IMREAD_GRAYSCALE), (size, size))
-		training_data.append([np.array(image), np.array(breed)])
+		try:
+			breed = get_dog(image)
+			path = os.path.join(training_images, image)
+			image = cv2.resize(cv2.imread(path, cv2.IMREAD_GRAYSCALE), (size, size))
+			training_data.append([np.array(image), np.array(breed)])
+		except:
+			continue
 	shuffle(training_data)
 	np.save('train_data.npy', training_data)
 	return training_data
@@ -61,10 +64,13 @@ def create_train_data():
 def create_test_data():
 	testing_data = []
 	for image in os.listdir(testing_images):
-		path = os.path.join(testing_images,image)
-		image_num = image.split('.')[0]
-		image = cv2.resize(cv2.imread(path,cv2.IMREAD_GRAYSCALE), (size, size))
-		testing_data.append([np.array(image), image_num])   
+		try:
+			path = os.path.join(testing_images,image)
+			image_num = image.split('.')[0]
+			image = cv2.resize(cv2.imread(path,cv2.IMREAD_GRAYSCALE), (size, size))
+			testing_data.append([np.array(image), image_num])
+		except:
+			continue
 	shuffle(testing_data)
 	np.save('test_data.npy', testing_data)
 	return testing_data

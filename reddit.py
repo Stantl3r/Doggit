@@ -46,25 +46,50 @@ def determine_breed(url):
 		return dog_breed
 
 def authenticate():
-	reddit = praw.Reddit(client_id='ID',
-                     	client_secret='SECRET',
-                     	password='PASSWORD',
-                     	user_agent='Bot created by /u/Lvl1Stantler',
-                     	username='DoggitBot')
+	reddit = praw.Reddit(client_id='CLIENT_ID',
+                        client_secret='CLIENT_SECRET',
+                        password='PASSWORD',
+                        user_agent='Doggit by /u/Lvl1Stantler',
+                        username='DoggitBot')
 	return reddit
 
 
 #Start Bot
 reddit = authenticate()
-subreddit = reddit.subreddit('rarepuppers').new()
-for submission in subreddit:
-	submission.comments.replace_more(limit=None)
-	comment_queue = submission.comments[:]
-	while comment_queue:
-		comment = comment_queue.pop(0)
-		if '!breed' in comment.body:
-			print('Found')
-			comment.reply('The dog in the picture appears to be a ' + determine_breed(submission.url) + '.')
-		comment_queue.extend(comment.replies)
+print(reddit.user.me())
+while True:
+	print('Loop')
+	subreddit = reddit.subreddit('rarepuppers').new()
+	for submission in subreddit:
+		submission.comments.replace_more(limit=None)
+		comment_queue = submission.comments[:]
+		while comment_queue:
+			comment = comment_queue.pop(0)
+			if '!breed' in comment.body:
+				print('Found')
+				comment.reply('The dog in the picture appears to be a ' + determine_breed(submission.url) + '.')
+			comment_queue.extend(comment.replies)
+
+	subreddit = reddit.subreddit('allthingsdogs').new()
+	for submission in subreddit:
+		submission.comments.replace_more(limit=None)
+		comment_queue = submission.comments[:]
+		while comment_queue:
+			comment = comment_queue.pop(0)
+			if '!breed' in comment.body:
+				print('Found')
+				comment.reply('The dog in the picture appears to be a ' + determine_breed(submission.url) + '.')
+			comment_queue.extend(comment.replies)
+
+	subreddit = reddit.subreddit('dogpictures').new()
+	for submission in subreddit:
+		submission.comments.replace_more(limit=None)
+		comment_queue = submission.comments[:]
+		while comment_queue:
+			comment = comment_queue.pop(0)
+			if '!breed' in comment.body:
+				print('Found')
+				comment.reply('The dog in the picture appears to be a ' + determine_breed(submission.url) + '.')
+			comment_queue.extend(comment.replies)
 
 
