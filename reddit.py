@@ -55,41 +55,42 @@ def authenticate():
 
 
 #Start Bot
-reddit = authenticate()
-print(reddit.user.me())
-while True:
-	print('Loop')
-	subreddit = reddit.subreddit('rarepuppers').new()
-	for submission in subreddit:
-		submission.comments.replace_more(limit=None)
-		comment_queue = submission.comments[:]
-		while comment_queue:
-			comment = comment_queue.pop(0)
-			if '!breed' in comment.body:
-				print('Found')
-				comment.reply('The dog in the picture appears to be a ' + determine_breed(submission.url) + '.')
-			comment_queue.extend(comment.replies)
+if __name__ == "__main__":
+	reddit = authenticate()
+	print(reddit.user.me())
+	while True:
+		print('Loop')
+		subreddit = reddit.subreddit('rarepuppers').new()
+		for submission in subreddit:
+			submission.comments.replace_more(limit=None)
+			comment_queue = submission.comments[:]
+			while comment_queue:
+				comment = comment_queue.pop(0)
+				if '!breed' in comment.body:
+					print('Found')
+					comment.reply('The dog in the picture appears to be a ' + determine_breed(submission.url) + '.')
+				comment_queue.extend(comment.replies)
 
-	subreddit = reddit.subreddit('allthingsdogs').new()
-	for submission in subreddit:
-		submission.comments.replace_more(limit=None)
-		comment_queue = submission.comments[:]
-		while comment_queue:
-			comment = comment_queue.pop(0)
-			if '!breed' in comment.body:
-				print('Found')
-				comment.reply('The dog in the picture appears to be a ' + determine_breed(submission.url) + '.')
-			comment_queue.extend(comment.replies)
+		subreddit = reddit.subreddit('allthingsdogs').new()
+		for submission in subreddit:
+			submission.comments.replace_more(limit=None)
+			comment_queue = submission.comments[:]
+			while comment_queue:
+				comment = comment_queue.pop(0)
+				if '!breed' in comment.body:
+					print('Found')
+					comment.reply('The dog in the picture appears to be a ' + determine_breed(submission.url) + '.')
+				comment_queue.extend(comment.replies)
 
-	subreddit = reddit.subreddit('dogpictures').new()
-	for submission in subreddit:
-		submission.comments.replace_more(limit=None)
-		comment_queue = submission.comments[:]
-		while comment_queue:
-			comment = comment_queue.pop(0)
-			if '!breed' in comment.body:
-				print('Found')
-				comment.reply('The dog in the picture appears to be a ' + determine_breed(submission.url) + '.')
-			comment_queue.extend(comment.replies)
+		subreddit = reddit.subreddit('dogpictures').new()
+		for submission in subreddit:
+			submission.comments.replace_more(limit=None)
+			comment_queue = submission.comments[:]
+			while comment_queue:
+				comment = comment_queue.pop(0)
+				if '!breed' in comment.body:
+					print('Found')
+					comment.reply('The dog in the picture appears to be a ' + determine_breed(submission.url) + '.')
+				comment_queue.extend(comment.replies)
 
 
